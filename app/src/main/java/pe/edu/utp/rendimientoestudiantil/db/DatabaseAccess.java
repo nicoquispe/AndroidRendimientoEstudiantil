@@ -78,7 +78,23 @@ public class DatabaseAccess {
 
 
     /* GET BY MODEL */
-    public ArrayList<Student> getAlumnosByCurso(Course course){
+    public ArrayList<Student> getStudentsByCourse(Integer courseId){
+        ArrayList<Student> students = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM Student WHERE course = " + courseId , null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Student student = new Student();
+            student.setId(cursor.getInt(0));
+            student.setFirst_name(cursor.getString(1));
+            student.setLast_name(cursor.getString(2));
+            student.setCourse( getCursoById( cursor.getInt(3) ) );
+            students.add(student);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return students;
+    }
+    public ArrayList<Student> getStudentsByCourse(Course course){
         ArrayList<Student> students = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM Student WHERE course = " + course.getId() , null);
         cursor.moveToFirst();
@@ -93,18 +109,26 @@ public class DatabaseAccess {
         }
         cursor.close();
         return students;
-        /*
-        ArrayList<Student> students = this.getStudents();
-        ArrayList<Student> alumnosReturn = new ArrayList<>();
-        for (Student student : students) {
-            if ( student.getCourse() == course){
-                alumnosReturn.add(student);
-            }
-        }
-        return alumnosReturn;
-        */
     }
-    public ArrayList<Course> getCursosByInstitucion(Institution institution) {
+    public ArrayList<Course> getCoursesByInstitucion(Integer institutionId) {
+        //ArrayList<Course> courses = this.getCourses();
+        ArrayList<Course> courses = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM Course WHERE teacher = " + institutionId , null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Course course = new Course();
+            course.setId( cursor.getInt(0) );
+            course.setName( cursor.getString(1) );
+            course.setInstitution( getInstitutionById( cursor.getInt(2) ) );
+            course.setTeacher( getTeacherById( cursor .getInt(3) ) );
+            courses.add(course);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return courses;
+    }
+
+    public ArrayList<Course> getCoursesByInstitucion(Institution institution) {
         //ArrayList<Course> courses = this.getCourses();
         ArrayList<Course> courses = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM Course WHERE teacher = " + institution.getId() , null);
