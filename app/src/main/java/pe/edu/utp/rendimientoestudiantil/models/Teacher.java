@@ -12,7 +12,7 @@ public class Teacher extends Person {
         this.first_name = first_name;
         this.last_name = last_name;
     }
-
+    /*
     public void initialize(){
         this.courses = new ArrayList<>();
         this.instituciones= new ArrayList<>();
@@ -74,6 +74,7 @@ public class Teacher extends Person {
         this.students.add( new Student( 1413294, "MORALES SEGOVIA", "LUCHO GREGORIO", this.courses.get(7) ) ) ;
 
     }
+    */
 
     public Teacher() {
     }
