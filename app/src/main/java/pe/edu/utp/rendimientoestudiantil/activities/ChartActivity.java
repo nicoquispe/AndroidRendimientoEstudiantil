@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
-import pe.edu.utp.rendimientoestudiantil.models.ChartItem;
-import pe.edu.utp.rendimientoestudiantil.models.LineChartItem;
+import pe.edu.utp.rendimientoestudiantil.items.ChartItem;
+import pe.edu.utp.rendimientoestudiantil.items.LineChartItem;
 
 public class ChartActivity extends AppCompatActivity {
 

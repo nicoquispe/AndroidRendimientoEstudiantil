@@ -1,13 +1,12 @@
-package pe.edu.utp.rendimientoestudiantil.models;
+package pe.edu.utp.rendimientoestudiantil.entities;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 
 import java.util.ArrayList;
 
 import pe.edu.utp.rendimientoestudiantil.db.Db;
+import pe.edu.utp.rendimientoestudiantil.models.Institution;
 
 /**
  * Created by nico on 06/06/16.
@@ -16,7 +15,7 @@ public class InstitutionsEntity extends BaseEntity {
 
     private  static String DEFAULT_QUERY = "SELECT * FROM " + Db.TABLE_Institution;
 
-    public void insertInstitution( Institution institution, int teacherId) {
+    public void insertInstitution(Institution institution, int teacherId) {
         ContentValues values = new ContentValues();
         values.put("name", institution.getName());
         long institutionID = database.insert(Db.TABLE_Institution, null, values);
@@ -39,7 +38,7 @@ public class InstitutionsEntity extends BaseEntity {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Institution institution = new Institution();
-            institution.setId(cursor.getInt(0));
+            //institution.setId(cursor.getInt(0));
             institution.setName(cursor.getString(1));
             institutions.add(institution);
             cursor.moveToNext();
@@ -53,7 +52,7 @@ public class InstitutionsEntity extends BaseEntity {
         Cursor cursor = database.rawQuery(DEFAULT_QUERY + " WHERE id = " + Integer.toString( institution_id ) , null);
         if (cursor.moveToFirst()){
             Institution institution = new Institution();
-            institution.setId( cursor.getInt(0) );
+            //institution.setId( cursor.getInt(0) );
             institution.setName(cursor.getString(1));
             cursor.close();
             return institution;
@@ -61,6 +60,5 @@ public class InstitutionsEntity extends BaseEntity {
         cursor.close();
         return null;
     }
-
 
 }

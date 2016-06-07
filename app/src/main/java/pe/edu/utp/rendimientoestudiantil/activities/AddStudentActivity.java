@@ -38,6 +38,7 @@ public class AddStudentActivity extends BaseActivity {
             addInstitution.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    /*
                     databaseAccess.open();
                     Student newStudent = new Student();
                     newStudent.setFirst_name( firstName.getText().toString() );
@@ -46,6 +47,7 @@ public class AddStudentActivity extends BaseActivity {
                     databaseAccess.close();
                     setResult(RESULT_OK);
                     finish();
+                    */
                 }
             });
         }

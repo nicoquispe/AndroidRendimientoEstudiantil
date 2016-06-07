@@ -1,15 +1,11 @@
-package pe.edu.utp.rendimientoestudiantil.models;
+package pe.edu.utp.rendimientoestudiantil.entities;
 
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.content.SharedPreferences;
-import android.util.Log;
 
 import pe.edu.utp.rendimientoestudiantil.db.Db;
+import pe.edu.utp.rendimientoestudiantil.models.Teacher;
 
 /**
  * Created by nico on 06/06/16.
@@ -36,8 +32,8 @@ public class TeachersEntity extends BaseEntity {
     public void updateTeacher(Teacher oldTeacher, Teacher newTeacher) {
         ContentValues values = new ContentValues();
 
-        values.put("first_name", newTeacher.getFirst_name());
-        values.put("last_name", newTeacher.getLast_name());
+        //values.put("first_name", newTeacher.getFirst_name());
+        //values.put("last_name", newTeacher.getLast_name());
 
         database.update( Db.TABLE_Teacher , values, "id = ?", new String[]{ String.valueOf( oldTeacher.getId() ) });
     }
@@ -53,9 +49,9 @@ public class TeachersEntity extends BaseEntity {
             Cursor cursor = database.rawQuery(DEFAULT_QUERY + " WHERE id = " + Integer.toString( teacher_id ) , null);
             if (cursor.moveToFirst()){
                 Teacher teacher = new Teacher();
-                teacher.setId(cursor.getInt(0));
-                teacher.setFirst_name(cursor.getString(1));
-                teacher.setLast_name(cursor.getString(2));
+                teacher.setId(cursor.getLong(0));
+                //teacher.setFirst_name(cursor.getString(1));
+                //teacher.setLast_name(cursor.getString(2));
                 return teacher;
             }
         }

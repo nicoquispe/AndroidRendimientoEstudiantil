@@ -1,12 +1,13 @@
-package pe.edu.utp.rendimientoestudiantil.models;
+package pe.edu.utp.rendimientoestudiantil.entities;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
 import pe.edu.utp.rendimientoestudiantil.db.Db;
+import pe.edu.utp.rendimientoestudiantil.models.Course;
+import pe.edu.utp.rendimientoestudiantil.models.Student;
 
 /**
  * Created by nico on 06/06/16.
@@ -15,10 +16,10 @@ public class StudentsEntity extends BaseEntity {
     private  static String DEFAULT_QUERY = "SELECT * FROM " + Db.TABLE_Student;
 
 
-    public void insertStudent( Student student, int course_id) {
+    public void insertStudent(Student student, int course_id) {
         ContentValues values = new ContentValues();
-        values.put("first_name", student.getFirst_name());
-        values.put("last_name", student.getLast_name());
+        //values.put("first_name", student.getFirst_name());
+        //values.put("last_name", student.getLast_name());
         long idStudent = database.insert("Student", null, values);
         CousesEntity.createCourse_Student( course_id, idStudent );
     }
@@ -30,9 +31,9 @@ public class StudentsEntity extends BaseEntity {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Student student = new Student();
-            student.setId(cursor.getInt(0));
-            student.setFirst_name(cursor.getString(1));
-            student.setLast_name(cursor.getString(2));
+            student.setId(cursor.getLong(0));
+            //student.setFirst_name(cursor.getString(1));
+            //student.setLast_name(cursor.getString(2));
             students.add(student);
             cursor.moveToNext();
         }
@@ -47,9 +48,9 @@ public class StudentsEntity extends BaseEntity {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Student student = new Student();
-            student.setId(cursor.getInt(0));
-            student.setFirst_name(cursor.getString(1));
-            student.setLast_name(cursor.getString(2));
+            student.setId(cursor.getLong(0));
+            //student.setFirst_name(cursor.getString(1));
+            //student.setLast_name(cursor.getString(2));
             students.add(student);
             cursor.moveToNext();
         }
@@ -63,9 +64,9 @@ public class StudentsEntity extends BaseEntity {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Student student = new Student();
-            student.setId(cursor.getInt(0));
-            student.setFirst_name(cursor.getString(1));
-            student.setLast_name(cursor.getString(2));
+            student.setId(cursor.getLong(0));
+            //student.setFirst_name(cursor.getString(1));
+            //student.setLast_name(cursor.getString(2));
             students.add(student);
             cursor.moveToNext();
         }

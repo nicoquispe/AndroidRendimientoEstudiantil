@@ -10,15 +10,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.activities.CoursesActivity;
 import pe.edu.utp.rendimientoestudiantil.R;
 import pe.edu.utp.rendimientoestudiantil.models.Institution;
 
 public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.ViewHolder>  {
-    private ArrayList<Institution> instituciones;
+    private List<Institution> instituciones;
 
-    public InstitutionAdapter(ArrayList<Institution> instituciones) {
+    public InstitutionAdapter(List<Institution> instituciones) {
         this.instituciones = instituciones;
     }
 
@@ -39,7 +40,7 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
                 itemIntent = new Intent(view.getContext(), CoursesActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("name", instituciones.get(position).getName());
-                bundle.putInt("id", instituciones.get(position).getId());
+                bundle.putLong("id", instituciones.get(position).getId());
                     itemIntent.putExtras(bundle);
                 view.getContext().startActivity(itemIntent);
             }

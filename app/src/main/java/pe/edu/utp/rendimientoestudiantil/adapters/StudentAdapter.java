@@ -39,7 +39,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
                 itemIntent = new Intent(view.getContext(), ChartActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("name", students.get(position).getFullName());
-                bundle.putInt("id", students.get(position).getId());
+                bundle.putLong("id", students.get(position).getId());
                 itemIntent.putExtras(bundle);
                 view.getContext().startActivity(itemIntent);
             }

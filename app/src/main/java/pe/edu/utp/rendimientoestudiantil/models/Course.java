@@ -1,21 +1,14 @@
 package pe.edu.utp.rendimientoestudiantil.models;
 
-public class Course {
-    protected int id;
-    protected String name;
-    protected int cycle;
-    protected String turn;
-    protected int section_number;
-    protected Institution institution;
-    protected Teacher teacher;
+import com.orm.SugarRecord;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+public class Course extends SugarRecord {
+    String name;
+    int cycle;
+    String turn;
+    int section_number;
+    Institution institution;
+    Teacher teacher;
 
     public String getName() {
         return name;
@@ -23,14 +16,6 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
     }
 
     public Institution getInstitution() {
@@ -41,8 +26,7 @@ public class Course {
         this.institution = institution;
     }
 
-    public Course(int id, String name, int cycle, String turn, int section_number, Institution institution, Teacher teacher) {
-        this.id = id;
+    public Course(String name, int cycle, String turn, int section_number, Institution institution,  Teacher teacher) {
         this.name = name;
         this.cycle = cycle;
         this.turn = turn;

@@ -1,4 +1,6 @@
-package pe.edu.utp.rendimientoestudiantil.models;
+package pe.edu.utp.rendimientoestudiantil.items;
+
+import pe.edu.utp.rendimientoestudiantil.models.Course;
 
 public class Evaluacion {
     private int id;

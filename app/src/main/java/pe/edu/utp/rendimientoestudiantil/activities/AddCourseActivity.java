@@ -15,10 +15,13 @@ import pe.edu.utp.rendimientoestudiantil.R;
 import pe.edu.utp.rendimientoestudiantil.db.DatabaseAccess;
 import pe.edu.utp.rendimientoestudiantil.models.Course;
 import pe.edu.utp.rendimientoestudiantil.models.Institution;
+import pe.edu.utp.rendimientoestudiantil.models.Teacher;
 
 public class AddCourseActivity extends BaseActivity {
 
-    private int idInstitution;
+    Long idInstitution;
+    Institution institution;
+    Teacher teacher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,11 @@ public class AddCourseActivity extends BaseActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null){
 
-            idInstitution = extras.getInt("idInstitution");
+            idInstitution = extras.getLong("idInstitution");
+            institution = Institution.findById(Institution.class, idInstitution);
+
+            teacher = Teacher.findById(Teacher.class, 1);
+
             final Spinner spinner = (Spinner) findViewById(R.id.spinner);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                     R.array.turnos_array, android.R.layout.simple_spinner_item);
@@ -48,14 +55,10 @@ public class AddCourseActivity extends BaseActivity {
             addInstitution.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    databaseAccess.open();
-                    Course newCourse = new Course();
-                    newCourse.setName( nameEditText.getText().toString() );
-                    newCourse.setCycle( Integer.parseInt( cicloeEditText.getText().toString() ) );
-                    newCourse.setSection_number( Integer.parseInt( seccionEditText.getText().toString() ) );
-                    newCourse.setTurn( spinner.getSelectedItem().toString() );
-                    databaseAccess.getCousesEntity().insertCource( newCourse, idInstitution, teacherId );
-                    databaseAccess.close();
+                    Course newCourse = new Course(nameEditText.getText().toString(), Integer.parseInt( cicloeEditText.getText().toString() ), spinner.getSelectedItem().toString(), Integer.parseInt( seccionEditText.getText().toString() ) , institution, teacher );
+                    newCourse.save();
+
+
                     setResult(RESULT_OK);
                     finish();
                 }

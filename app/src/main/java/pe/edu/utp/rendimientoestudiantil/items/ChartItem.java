@@ -1,4 +1,4 @@
-package pe.edu.utp.rendimientoestudiantil.models;
+package pe.edu.utp.rendimientoestudiantil.items;
 
 import android.content.Context;
 import android.view.View;

@@ -19,8 +19,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_Institution = "Institution";
     private static final String TABLE_Teacher_Institution = "Teacher_Institution";
     private static final String TABLE_Course = "Course";
-    private static final String TABLE_Course_Institution = "Course_Institution";
-    private static final String TABLE_Teacher_Course = "Teacher_Course";
     private static final String TABLE_Student = "Student";
     private static final String TABLE_Student_Course = "Student_Course";
 
@@ -53,8 +51,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Institution );
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Teacher_Institution );
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Course );
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_Course_Institution );
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_Teacher_Course );
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Student );
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Student_Course );
 

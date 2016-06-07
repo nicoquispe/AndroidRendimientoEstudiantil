@@ -14,17 +14,21 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
 import pe.edu.utp.rendimientoestudiantil.adapters.CourseAdapter;
 import pe.edu.utp.rendimientoestudiantil.adapters.InstitutionAdapter;
 import pe.edu.utp.rendimientoestudiantil.db.DatabaseAccess;
 import pe.edu.utp.rendimientoestudiantil.models.Course;
+import pe.edu.utp.rendimientoestudiantil.models.Institution;
 
 public class CoursesActivity extends BaseActivity {
-    Integer idInstitution;
+    Long idInstitution;
     String nameInstitution;
-    ArrayList<Course> courses;
+    Institution institution;
+
+    List<Course> courses;
 
     RecyclerView mCourseRecyclerView;
     RecyclerView.Adapter mCourseAdapter;
@@ -40,7 +44,11 @@ public class CoursesActivity extends BaseActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null){
 
-            idInstitution = extras.getInt("id");
+            idInstitution = extras.getLong("id");
+            institution = Institution.findById(Institution.class, idInstitution);
+
+            courses = Course.find(Course.class, "institution = ?", institution.getId().toString() );
+
             nameInstitution = extras.getString("name");
 
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -49,7 +57,7 @@ public class CoursesActivity extends BaseActivity {
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), AddCourseActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putInt("idInstitution", idInstitution);
+                    bundle.putLong("idInstitution", institution.getId());
                     intent.putExtras(bundle);
                     startActivityForResult(intent, 0);
                 }
@@ -62,7 +70,6 @@ public class CoursesActivity extends BaseActivity {
             mCourseLayoutManager = new LinearLayoutManager(this);
             mCourseRecyclerView.setLayoutManager(mCourseLayoutManager);
 
-            courses = getCoursesByInstitutionId(idInstitution);
             mCourseAdapter = new CourseAdapter( courses );
             mCourseRecyclerView.setAdapter(mCourseAdapter);
         }
@@ -82,9 +89,6 @@ public class CoursesActivity extends BaseActivity {
                     .show();
         } else {
             Toast.makeText(this, "Curso creado", Toast.LENGTH_SHORT).show();
-            courses = getCoursesByInstitutionId(idInstitution);
-            mCourseAdapter = new CourseAdapter( courses );
-            mCourseRecyclerView.setAdapter(mCourseAdapter);
         }
     }
 

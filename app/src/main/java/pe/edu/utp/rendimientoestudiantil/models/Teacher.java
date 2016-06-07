@@ -1,16 +1,27 @@
 package pe.edu.utp.rendimientoestudiantil.models;
 
-import java.util.ArrayList;
+import com.orm.SugarRecord;
 
-public class Teacher extends Person {
-    private ArrayList<Course> courses;
-    private ArrayList<Institution> instituciones;
-    private ArrayList<Student> students;
+import java.util.List;
 
-    public Teacher(int id, String first_name, String last_name) {
-        this.id = id;
+public class Teacher extends SugarRecord {
+
+    //private ArrayList<Course> courses;
+    //private List<Institution> institutions;
+    //private ArrayList<Student> students;
+    String first_name;
+    String last_name;
+    String email;
+    String password;
+
+    public Teacher(String first_name, String last_name, String email, String password) {
         this.first_name = first_name;
         this.last_name = last_name;
+        this.email = email;
+        this.password = password;
+    }
+    public List<TeacherInstitution> getInstitutions() {
+        return TeacherInstitution.find(TeacherInstitution.class, "teacher = ?", this.getId().toString());
     }
     /*
     public void initialize(){
@@ -77,8 +88,10 @@ public class Teacher extends Person {
     */
 
     public Teacher() {
+
     }
 
+    /*
     public ArrayList<Course> getCourses(){
         return this.courses;
     }
@@ -88,6 +101,6 @@ public class Teacher extends Person {
     public ArrayList<Student> getStudents(){
         return this.students;
     }
-
+*/
 
 }

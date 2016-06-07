@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
 import pe.edu.utp.rendimientoestudiantil.adapters.InstitutionAdapter;
@@ -29,6 +31,7 @@ import pe.edu.utp.rendimientoestudiantil.models.Course;
 import pe.edu.utp.rendimientoestudiantil.models.Institution;
 import pe.edu.utp.rendimientoestudiantil.models.Student;
 import pe.edu.utp.rendimientoestudiantil.models.Teacher;
+import pe.edu.utp.rendimientoestudiantil.models.TeacherInstitution;
 
 public class MainActivity extends BaseActivity {
 
@@ -37,7 +40,7 @@ public class MainActivity extends BaseActivity {
     FloatingActionButton fab;
     RecyclerView mInstitutionRecyclerView;
     RecyclerView.Adapter mInstitutionAdapter;
-    ArrayList<Institution> instituciones;
+    List<Institution> instituciones;
 
     private void exportDB() {
         // TODO Auto-generated method stub
@@ -81,7 +84,7 @@ public class MainActivity extends BaseActivity {
         mInstitutionLayoutManager = new LinearLayoutManager(this);
         mInstitutionRecyclerView.setLayoutManager(mInstitutionLayoutManager);
 
-        instituciones = getInstitutions();
+        instituciones = Institution.listAll(Institution.class);
 
         mInstitutionAdapter = new InstitutionAdapter( instituciones );
         mInstitutionRecyclerView.setAdapter(mInstitutionAdapter);
@@ -112,9 +115,6 @@ public class MainActivity extends BaseActivity {
         } else {
             Toast.makeText(this, "Institución creada", Toast.LENGTH_SHORT)
                     .show();
-            instituciones = getInstitutions();
-            mInstitutionAdapter = new InstitutionAdapter( instituciones );
-            mInstitutionRecyclerView.setAdapter(mInstitutionAdapter);
         }
     }
 

@@ -1,4 +1,4 @@
-package pe.edu.utp.rendimientoestudiantil.models;
+package pe.edu.utp.rendimientoestudiantil.entities;
 
 import android.database.sqlite.SQLiteDatabase;
 

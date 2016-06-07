@@ -1,13 +1,13 @@
-package pe.edu.utp.rendimientoestudiantil.models;
+package pe.edu.utp.rendimientoestudiantil.entities;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
 import java.util.ArrayList;
 
 import pe.edu.utp.rendimientoestudiantil.db.Db;
+import pe.edu.utp.rendimientoestudiantil.models.Course;
 
 /**
  * Created by nico on 06/06/16.
@@ -16,7 +16,7 @@ public class CousesEntity extends BaseEntity {
 
     private  static String DEFAULT_QUERY = "SELECT * FROM " + Db.TABLE_Course;
 
-    public static void insertCource( Course course, int idInstitution, int teacherId) {
+    public static void insertCource(Course course, int idInstitution, int teacherId) {
         ContentValues values = new ContentValues();
         values.put("name", course.getName());
         values.put("cycle",course.getCycle());
@@ -44,13 +44,13 @@ public class CousesEntity extends BaseEntity {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Course course = new Course();
-            course.setId(cursor.getInt(0));
+            course.setId(cursor.getLong(0));
             course.setName(cursor.getString(1));
             course.setCycle( cursor.getInt(2) );
             course.setTurn(cursor.getString(3));
             course.setSection_number( cursor.getInt(4) );
             course.setInstitution( InstitutionsEntity.findInstitutionById( cursor.getInt(5) ) );
-            course.setTeacher( TeachersEntity.findTeacherById( cursor .getInt(6) ) );
+            //course.setTeacher( TeachersEntity.findTeacherById( cursor .getInt(6) ) );
 
             courses.add(course);
             cursor.moveToNext();
@@ -68,13 +68,13 @@ public class CousesEntity extends BaseEntity {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Course course = new Course();
-            course.setId( cursor.getInt(0) );
+            course.setId( cursor.getLong(0) );
             course.setName(cursor.getString(1));
             course.setCycle( cursor.getInt(2) );
             course.setTurn(cursor.getString(3));
             course.setSection_number( cursor.getInt(4) );
             course.setInstitution( InstitutionsEntity.findInstitutionById( cursor.getInt(5) ) );
-            course.setTeacher( TeachersEntity.findTeacherById( cursor .getInt(6) ) );
+            //course.setTeacher( TeachersEntity.findTeacherById( cursor .getInt(6) ) );
             courses.add(course);
             cursor.moveToNext();
         }
@@ -88,13 +88,13 @@ public class CousesEntity extends BaseEntity {
             Cursor cursor = database.rawQuery(DEFAULT_QUERY + " WHERE id = " + Integer.toString( course_id ) , null);
             if (cursor.moveToFirst()){
                 Course course = new Course();
-                course.setId( cursor.getInt(0) );
+                course.setId( cursor.getLong(0) );
                 course.setName(cursor.getString(1));
                 course.setCycle( cursor.getInt(2) );
                 course.setTurn(cursor.getString(3));
                 course.setSection_number( cursor.getInt(4) );
                 course.setInstitution( InstitutionsEntity.findInstitutionById( cursor.getInt(5) ) );
-                course.setTeacher( TeachersEntity.findTeacherById( cursor .getInt(6) ) );
+                //course.setTeacher( TeachersEntity.findTeacherById( cursor .getInt(6) ) );
                 return course;
             }
         }
