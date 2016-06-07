@@ -62,7 +62,7 @@ public class CoursesActivity extends BaseActivity {
             mCourseLayoutManager = new LinearLayoutManager(this);
             mCourseRecyclerView.setLayoutManager(mCourseLayoutManager);
 
-            courses = getCoursesInstitutions(idInstitution);
+            courses = getCoursesByInstitutionId(idInstitution);
             mCourseAdapter = new CourseAdapter( courses );
             mCourseRecyclerView.setAdapter(mCourseAdapter);
         }
@@ -82,7 +82,7 @@ public class CoursesActivity extends BaseActivity {
                     .show();
         } else {
             Toast.makeText(this, "Curso creado", Toast.LENGTH_SHORT).show();
-            courses = getCoursesInstitutions(idInstitution);
+            courses = getCoursesByInstitutionId(idInstitution);
             mCourseAdapter = new CourseAdapter( courses );
             mCourseRecyclerView.setAdapter(mCourseAdapter);
         }

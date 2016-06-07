@@ -33,7 +33,6 @@ public class AddStudentActivity extends BaseActivity {
             final EditText firstName = (EditText) findViewById(R.id.firstNameEditText);
             final EditText lastName = (EditText) findViewById(R.id.lastNameEditText);
 
-            final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
 
             Button addInstitution = (Button) findViewById(R.id.addStudent);
             addInstitution.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +42,7 @@ public class AddStudentActivity extends BaseActivity {
                     Student newStudent = new Student();
                     newStudent.setFirst_name( firstName.getText().toString() );
                     newStudent.setLast_name( lastName.getText().toString() );
-                    databaseAccess.insertStudent( newStudent, idCourse );
+                    databaseAccess.getStudentsEntity().insertStudent( newStudent, idCourse );
                     databaseAccess.close();
                     setResult(RESULT_OK);
                     finish();

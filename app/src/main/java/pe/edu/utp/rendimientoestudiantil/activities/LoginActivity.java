@@ -250,7 +250,7 @@ public class LoginActivity extends BaseLogin implements LoaderCallbacks<Cursor> 
 
             databaseAccess.open();
             String pwd;
-            pwd = databaseAccess.getProfesor(mEmail);
+            pwd = databaseAccess.getTeachersEntity().getProfesor(mEmail);
             Log.d("pwd", pwd);
             databaseAccess.close();
             if ( pwd != "NOT EXIST"  ){

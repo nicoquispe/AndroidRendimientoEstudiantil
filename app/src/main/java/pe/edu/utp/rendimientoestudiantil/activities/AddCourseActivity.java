@@ -54,7 +54,7 @@ public class AddCourseActivity extends BaseActivity {
                     newCourse.setCycle( Integer.parseInt( cicloeEditText.getText().toString() ) );
                     newCourse.setSection_number( Integer.parseInt( seccionEditText.getText().toString() ) );
                     newCourse.setTurn( spinner.getSelectedItem().toString() );
-                    databaseAccess.insertCource( newCourse, idInstitution, teacherId );
+                    databaseAccess.getCousesEntity().insertCource( newCourse, idInstitution, teacherId );
                     databaseAccess.close();
                     setResult(RESULT_OK);
                     finish();

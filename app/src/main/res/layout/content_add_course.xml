@@ -22,7 +22,6 @@
     <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New AutoCompleteTextView"
         android:id="@+id/autoCompleteTextView"
         android:layout_gravity="center_horizontal" />
 

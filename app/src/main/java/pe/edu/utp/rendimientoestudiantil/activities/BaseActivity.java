@@ -23,39 +23,35 @@ import pe.edu.utp.rendimientoestudiantil.models.Teacher;
  */
 public class BaseActivity extends AppCompatActivity {
     public int teacherId;
+    public DatabaseAccess databaseAccess;
 
     ArrayList<Institution>  getInstitutions ( ){
-        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess = DatabaseAccess.getInstance( this );
         databaseAccess.open();
-        ArrayList<Institution> _instituciones = databaseAccess.getInstitutions();
+        ArrayList<Institution> instituciones = databaseAccess.getInstitutionsEntity().findInstitutionsByTeacher( teacherId );
         databaseAccess.close();
-        return _instituciones;
+        return instituciones;
     }
-    ArrayList<Course>  getCoursesInstitutions ( int idInstitution ){
-
-        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+    ArrayList<Course>  getCoursesByInstitutionId ( int idInstitution ){
+        databaseAccess = DatabaseAccess.getInstance( this );
         databaseAccess.open();
-        ArrayList<Course> _courses = databaseAccess.getCoursesByInstitucion( idInstitution );
+        ArrayList<Course> courses = databaseAccess.getCousesEntity().findCoursesByInstitucion( idInstitution, teacherId );
         databaseAccess.close();
-        return _courses;
+        return courses;
     }
-
 
     ArrayList<Student>  getStudents (int idCourse ){
-
-        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess = DatabaseAccess.getInstance( this );
         databaseAccess.open();
-        ArrayList<Student> _students = databaseAccess.getStudentsByCourse( idCourse );
+        ArrayList<Student> students = databaseAccess.getStudentsEntity().findStudentsByCourse( idCourse );
         databaseAccess.close();
-        return _students;
+        return students;
     }
-
-
-
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        databaseAccess = DatabaseAccess.getInstance( this );
         teacherId= getCurrentProfesorID();
         if( teacherId == 0 ){
             Intent intent = new Intent( this, LoginActivity.class);
