@@ -7,6 +7,22 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activities.SplashActivity">
-
+    tools:context=".activities.SplashActivity"
+    android:gravity="center_horizontal">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/student"
+        android:id="@+id/imageView"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:text="Rendimiento Estudiantil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:textSize="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

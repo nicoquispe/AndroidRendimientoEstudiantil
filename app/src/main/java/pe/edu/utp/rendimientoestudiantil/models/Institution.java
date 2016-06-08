@@ -1,12 +1,14 @@
 package pe.edu.utp.rendimientoestudiantil.models;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
 
 /**
  * Created by nico on 25/05/16.
  */
 
 public class Institution extends SugarRecord {
+    @Unique
     String name;
 
     public Institution( String name) {
@@ -23,5 +25,11 @@ public class Institution extends SugarRecord {
 
     public Institution() {
 
+    }
+
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

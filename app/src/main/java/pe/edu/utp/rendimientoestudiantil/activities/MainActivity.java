@@ -22,9 +22,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
+import pe.edu.utp.rendimientoestudiantil.SessionManager;
 import pe.edu.utp.rendimientoestudiantil.adapters.InstitutionAdapter;
 import pe.edu.utp.rendimientoestudiantil.db.DatabaseAccess;
 import pe.edu.utp.rendimientoestudiantil.models.Course;
@@ -41,37 +43,6 @@ public class MainActivity extends BaseActivity {
     RecyclerView mInstitutionRecyclerView;
     RecyclerView.Adapter mInstitutionAdapter;
     List<Institution> instituciones;
-
-    private void exportDB() {
-        // TODO Auto-generated method stub
-
-        try {
-            File sd = Environment.getExternalStorageDirectory();
-            File data = Environment.getDataDirectory();
-
-            if (sd.canWrite()) {
-                String  currentDBPath= "//data//" + "pe.edu.utp.rendimientoestudiantil"
-                        + "//databases//" + "rendimiento.db";
-                String backupDBPath  = Environment.getDataDirectory() +"/rendimiento.txt";
-                File currentDB = new File(data, currentDBPath);
-                File backupDB = new File(sd, backupDBPath);
-
-                FileChannel src = new FileInputStream(currentDB).getChannel();
-                FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                dst.transferFrom(src, 0, src.size());
-                src.close();
-                dst.close();
-                Toast.makeText(getBaseContext(), backupDB.toString(),
-                        Toast.LENGTH_LONG).show();
-
-            }
-        } catch (Exception e) {
-
-            Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG)
-                    .show();
-
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +62,6 @@ public class MainActivity extends BaseActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +105,9 @@ public class MainActivity extends BaseActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.action_logout) {
+            logoutUser();
         }
 
         return super.onOptionsItemSelected(item);

@@ -9,14 +9,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.List;
+
 import pe.edu.utp.rendimientoestudiantil.R;
 import pe.edu.utp.rendimientoestudiantil.db.DatabaseAccess;
 import pe.edu.utp.rendimientoestudiantil.models.Course;
+import pe.edu.utp.rendimientoestudiantil.models.CourseStudent;
+import pe.edu.utp.rendimientoestudiantil.models.Institution;
 import pe.edu.utp.rendimientoestudiantil.models.Student;
+import pe.edu.utp.rendimientoestudiantil.models.Teacher;
+import pe.edu.utp.rendimientoestudiantil.models.TeacherInstitution;
 
 public class AddStudentActivity extends BaseActivity {
 
-    private int idCourse;
+    private Long idCourse;
+    private Course course;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,26 +35,33 @@ public class AddStudentActivity extends BaseActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
-            idCourse = extras.getInt("idCourse");
+            idCourse = extras.getLong("idCourse");
+
+            course = Course.findById(Course.class, idCourse);
 
             final EditText firstName = (EditText) findViewById(R.id.firstNameEditText);
             final EditText lastName = (EditText) findViewById(R.id.lastNameEditText);
-
-
             Button addInstitution = (Button) findViewById(R.id.addStudent);
             addInstitution.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    /*
-                    databaseAccess.open();
-                    Student newStudent = new Student();
-                    newStudent.setFirst_name( firstName.getText().toString() );
-                    newStudent.setLast_name( lastName.getText().toString() );
-                    databaseAccess.getStudentsEntity().insertStudent( newStudent, idCourse );
-                    databaseAccess.close();
+                    Student student;
+
+                    List<Student> _students = Student.find(Student.class, "firstname = ? and lastname = ?", firstName.getText().toString().trim(), lastName.getText().toString().trim() );
+                    if ( _students.size() > 0 ){
+                        student = _students.get(0);
+                    }
+                    else{
+                        student = new Student(firstName.getText().toString().trim(), lastName.getText().toString().trim() );
+                        student.save();
+                    }
+
+                    CourseStudent courseStudent  = new CourseStudent( course, student);
+                    courseStudent.save();
+
                     setResult(RESULT_OK);
                     finish();
-                    */
+
                 }
             });
         }

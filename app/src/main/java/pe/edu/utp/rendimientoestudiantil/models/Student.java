@@ -3,16 +3,36 @@ package pe.edu.utp.rendimientoestudiantil.models;
 import com.orm.SugarRecord;
 
 public class Student extends SugarRecord {
-    String first_name;
-    String last_name;
-    public Student( String first_name, String last_name) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    String firstname;
+    String lastname;
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public Student(String firstname, String lastname) {
+
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
 
     public Student() {
     }
-    public String getFullName () {
-        return this.first_name + ", " + this.last_name;
+
+    @Override
+    public String toString() {
+        return this.firstname + ", " + this.lastname;
     }
 }

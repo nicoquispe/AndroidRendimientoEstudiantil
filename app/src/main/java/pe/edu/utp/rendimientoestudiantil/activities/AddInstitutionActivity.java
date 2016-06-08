@@ -28,6 +28,9 @@ public class AddInstitutionActivity extends BaseActivity {
     private ArrayAdapter<String> arrayAdapter;
     List<TeacherInstitution> teacherInstituciones;
     Teacher teacher;
+    private List<Institution> instituciones;
+    private AutoCompleteTextView name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,25 +38,31 @@ public class AddInstitutionActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final EditText nameEditText = (EditText) findViewById(R.id.nameEditText);
+        name = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
 
+        name.setThreshold(3);
+        instituciones = Institution.listAll(Institution.class);
 
-        teacher = Teacher.findById(Teacher.class, 1);
+        ArrayAdapter<Institution> adapter = new ArrayAdapter<Institution>(
+                this, android.R.layout.simple_dropdown_item_1line, instituciones);
+        name.setAdapter(adapter);
 
-        teacherInstituciones = teacher.getInstitutions();
-        Log.e("Eo", teacherInstituciones.toString());
-
-
+        teacher = Teacher.findById(Teacher.class, idTeacher);
 
         Button addInstitution = (Button) findViewById(R.id.addInstitution);
 
         addInstitution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Institution institution = new Institution(nameEditText.getText().toString() );
-                institution.save();
-
+                List<Institution> _instituciones = Institution.find(Institution.class, "name = ?", name.getText().toString().trim());
+                Institution institution;
+                if ( _instituciones.size() > 0 ){
+                    institution = _instituciones.get(0);
+                }
+                else{
+                    institution = new Institution(name.getText().toString().trim() );
+                    institution.save();
+                }
                 TeacherInstitution teacherInstitution = new TeacherInstitution( teacher, institution);
                 teacherInstitution.save();
                 setResult(RESULT_OK);

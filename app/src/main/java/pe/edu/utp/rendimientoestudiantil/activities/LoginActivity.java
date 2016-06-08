@@ -29,7 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
+import pe.edu.utp.rendimientoestudiantil.SessionManager;
 import pe.edu.utp.rendimientoestudiantil.db.DatabaseAccess;
+import pe.edu.utp.rendimientoestudiantil.models.Teacher;
 
 
 /**
@@ -49,14 +51,18 @@ public class LoginActivity extends BaseLogin implements LoaderCallbacks<Cursor> 
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-
-    private DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+        //Teacher teacher = new Teacher("Ubaldo","Lizardo Silva","c0021@grupoutp.edu.pe","123456");
+        //teacher.save();
+
+        session = new SessionManager(getApplicationContext());
+
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -247,6 +253,20 @@ public class LoginActivity extends BaseLogin implements LoaderCallbacks<Cursor> 
             } catch (InterruptedException e) {
                 return false;
             }
+            List<Teacher> _teachers = Teacher.listAll(Teacher.class);
+            Log.e("ERR", _teachers.size() + "");
+            List<Teacher> teachers = Teacher.find(Teacher.class, "email = ? and password = ?", mEmail, mPassword);
+            if ( teachers.size() > 0 ){
+                ;
+                session.createLoginSession(teachers.get(0).getId(), teachers.get(0).getEmail());
+
+                // Staring MainActivity
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+            Log.e("ERR", teachers.toString() + "");
+            /*
 
             databaseAccess.open();
             String pwd;
@@ -258,7 +278,7 @@ public class LoginActivity extends BaseLogin implements LoaderCallbacks<Cursor> 
                     setCurrentProfesorID( 1 );
                     return true;
                 }
-            }
+            }*/
             return false;
         }
 
@@ -268,6 +288,7 @@ public class LoginActivity extends BaseLogin implements LoaderCallbacks<Cursor> 
             showProgress(false);
 
             if (success) {
+
                 Intent intent = new Intent( LoginActivity.this, MainActivity.class);
                 startActivity(intent);
 

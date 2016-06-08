@@ -12,22 +12,27 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
 import pe.edu.utp.rendimientoestudiantil.adapters.CourseAdapter;
 import pe.edu.utp.rendimientoestudiantil.adapters.StudentAdapter;
 import pe.edu.utp.rendimientoestudiantil.db.DatabaseAccess;
+import pe.edu.utp.rendimientoestudiantil.models.Course;
+import pe.edu.utp.rendimientoestudiantil.models.Institution;
 import pe.edu.utp.rendimientoestudiantil.models.Student;
 
 public class StudentsActivity extends BaseActivity {
 
-    Integer idCourse;
+    Long idCourse;
     String nameCourse;
-    ArrayList<Student> students;
+    List<Student> students;
 
     RecyclerView mStudentRecyclerView;
     RecyclerView.Adapter mStudentAdapter;
     RecyclerView.LayoutManager mStudentLayoutManager;
+    private Course course;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +42,11 @@ public class StudentsActivity extends BaseActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
-            idCourse = extras.getInt("id");
-            nameCourse = extras.getString("name");
+            idCourse = extras.getLong("id");
+            course = Course.findById(Course.class, idCourse);
 
+
+            students = course.findStudentsByCourse( );
 
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(new View.OnClickListener() {
@@ -47,21 +54,19 @@ public class StudentsActivity extends BaseActivity {
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), AddStudentActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putInt("idCourse", idCourse);
+                    bundle.putLong("idCourse", idCourse);
                     intent.putExtras(bundle);
                     startActivityForResult(intent, 0);
                 }
             });
 
-            this.setTitle(nameCourse);
-
+            this.setTitle(course.getName());
 
             mStudentRecyclerView = (RecyclerView) findViewById(R.id.StudentsRecyclerView);
             mStudentRecyclerView.setHasFixedSize(true);
             mStudentLayoutManager = new LinearLayoutManager(this);
             mStudentRecyclerView.setLayoutManager(mStudentLayoutManager);
 
-            students = getStudents( idCourse );
             mStudentAdapter = new StudentAdapter( students );
             mStudentRecyclerView.setAdapter(mStudentAdapter);
         }
@@ -80,9 +85,6 @@ public class StudentsActivity extends BaseActivity {
                     .show();
         } else {
             Toast.makeText(this, "Alumno asignado al curso", Toast.LENGTH_SHORT).show();
-            students = getStudents( idCourse );
-            mStudentAdapter = new StudentAdapter( students );
-            mStudentRecyclerView.setAdapter(mStudentAdapter);
         }
     }
 

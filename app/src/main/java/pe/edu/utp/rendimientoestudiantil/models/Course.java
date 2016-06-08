@@ -1,6 +1,16 @@
 package pe.edu.utp.rendimientoestudiantil.models;
 
+import android.support.annotation.NonNull;
+
 import com.orm.SugarRecord;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
 
 public class Course extends SugarRecord {
     String name;
@@ -41,6 +51,22 @@ public class Course extends SugarRecord {
 
     public void setCycle(int cycle) {
         this.cycle = cycle;
+    }
+
+
+    public List<Student> findStudentsByCourse(){
+        List<CourseStudent> courseStudents = CourseStudent.find(CourseStudent.class, "course = ?", this.getId().toString());
+        List<Student> students = new ArrayList<>();
+        if ( courseStudents.size()>0 ){
+            for ( CourseStudent courseStudent : courseStudents ) {
+                students.add( courseStudent.getStudent() );
+            }
+        }
+        //Set<Student> hs = new HashSet<Student>();
+        //hs.addAll(students);
+        //students.clear();
+        //students.addAll(hs);
+        return students;
     }
 
     public String getTurn() {

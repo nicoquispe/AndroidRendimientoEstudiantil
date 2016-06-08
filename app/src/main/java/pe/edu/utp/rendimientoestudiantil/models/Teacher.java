@@ -1,18 +1,33 @@
 package pe.edu.utp.rendimientoestudiantil.models;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
 
 import java.util.List;
 
 public class Teacher extends SugarRecord {
 
-    //private ArrayList<Course> courses;
-    //private List<Institution> institutions;
-    //private ArrayList<Student> students;
     String first_name;
     String last_name;
-    String email;
     String password;
+    @Unique
+    String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Teacher(String first_name, String last_name, String email, String password) {
         this.first_name = first_name;
@@ -90,17 +105,4 @@ public class Teacher extends SugarRecord {
     public Teacher() {
 
     }
-
-    /*
-    public ArrayList<Course> getCourses(){
-        return this.courses;
-    }
-    public ArrayList<Institution> getInstituciones(){
-        return this.instituciones;
-    }
-    public ArrayList<Student> getStudents(){
-        return this.students;
-    }
-*/
-
 }

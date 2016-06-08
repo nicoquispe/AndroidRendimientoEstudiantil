@@ -30,7 +30,6 @@ public class AddCourseActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         Bundle extras = getIntent().getExtras();
         if (extras != null){
 
@@ -55,9 +54,14 @@ public class AddCourseActivity extends BaseActivity {
             addInstitution.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Course newCourse = new Course(nameEditText.getText().toString(), Integer.parseInt( cicloeEditText.getText().toString() ), spinner.getSelectedItem().toString(), Integer.parseInt( seccionEditText.getText().toString() ) , institution, teacher );
+                    Course newCourse = new Course(
+                            nameEditText.getText().toString(),
+                            Integer.parseInt( cicloeEditText.getText().toString() ),
+                            spinner.getSelectedItem().toString(),
+                            Integer.parseInt( seccionEditText.getText().toString() ),
+                            institution,
+                            teacher );
                     newCourse.save();
-
 
                     setResult(RESULT_OK);
                     finish();

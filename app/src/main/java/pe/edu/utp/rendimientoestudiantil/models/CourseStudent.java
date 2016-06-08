@@ -14,4 +14,12 @@ public class CourseStudent extends SugarRecord {
     }
     public CourseStudent() {
     }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
 }

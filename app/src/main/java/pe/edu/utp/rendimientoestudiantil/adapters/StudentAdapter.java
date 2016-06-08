@@ -9,16 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
 import pe.edu.utp.rendimientoestudiantil.activities.ChartActivity;
 import pe.edu.utp.rendimientoestudiantil.models.Student;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHolder> {
-    private ArrayList<Student> students;
+    private List<Student> students;
 
-    public StudentAdapter(ArrayList<Student> students) {
+    public StudentAdapter(List<Student> students) {
         this.students = students;
     }
 
@@ -31,14 +31,14 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
     @Override
     public void onBindViewHolder( ViewHolder holder, final int position) {
-        holder.nameTextView.setText( students.get(position).getId() + " - " +  students.get(position).getFullName() );
+        holder.nameTextView.setText( students.get(position).getId() + " - " +  students.get(position).toString() );
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent itemIntent;
                 itemIntent = new Intent(view.getContext(), ChartActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("name", students.get(position).getFullName());
+                bundle.putString("name", students.get(position).toString());
                 bundle.putLong("id", students.get(position).getId());
                 itemIntent.putExtras(bundle);
                 view.getContext().startActivity(itemIntent);
