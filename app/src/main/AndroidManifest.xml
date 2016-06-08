@@ -25,7 +25,7 @@
         <meta-data android:name="QUERY_LOG" android:value="true" />
         <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="pe.edu.utp.rendimientoestudiantil.models" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.InstitutionsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             >
@@ -44,6 +44,7 @@
         <activity
             android:name=".activities.StudentsActivity"
             android:label="@string/title_activity_alumns"
+            android:screenOrientation="portrait"
             />
         <activity
             android:name=".activities.ChartActivity"
@@ -53,14 +54,17 @@
         <activity
             android:name=".activities.AddInstitutionActivity"
             android:label="@string/title_activity_add_institution"
+            android:screenOrientation="portrait"
             />
         <activity
             android:name=".activities.AddCourseActivity"
             android:label="@string/title_activity_add_course"
+            android:screenOrientation="portrait"
             />
         <activity
             android:name=".activities.AddStudentActivity"
             android:label="@string/title_activity_add_student"
+            android:screenOrientation="portrait"
             />
     </application>
 </manifest>

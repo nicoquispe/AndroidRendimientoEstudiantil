@@ -24,6 +24,12 @@
     <string name="title_activity_add_student">Agregar Estudiante</string>
 
 
+    <string name="action_register_notes">Registrar Nota</string>
+    <string name="action_add_notes">Agregar Notas</string>
+    <string name="action_action_compare">Comparar</string>
+    <string name="action_show_compare">Ver comparación</string>
+
+
     <string-array name="turnos_array">
         <item>Mañana</item>
         <item>Tarde</item>

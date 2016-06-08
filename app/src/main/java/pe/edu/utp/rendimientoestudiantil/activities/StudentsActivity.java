@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
@@ -73,6 +74,16 @@ public class StudentsActivity extends BaseActivity {
         else {
             finish();
         }
+    }
+
+
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        if (menu.findItem(R.id.action_show_compare) != null)
+            menu.findItem(R.id.action_show_compare).setVisible(true);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override

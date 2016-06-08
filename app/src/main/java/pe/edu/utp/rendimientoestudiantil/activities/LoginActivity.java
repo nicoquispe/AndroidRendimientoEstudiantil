@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
 import android.content.CursorLoader;
@@ -30,7 +29,6 @@ import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
 import pe.edu.utp.rendimientoestudiantil.SessionManager;
-import pe.edu.utp.rendimientoestudiantil.db.DatabaseAccess;
 import pe.edu.utp.rendimientoestudiantil.models.Teacher;
 
 
@@ -257,28 +255,12 @@ public class LoginActivity extends BaseLogin implements LoaderCallbacks<Cursor> 
             Log.e("ERR", _teachers.size() + "");
             List<Teacher> teachers = Teacher.find(Teacher.class, "email = ? and password = ?", mEmail, mPassword);
             if ( teachers.size() > 0 ){
-                ;
                 session.createLoginSession(teachers.get(0).getId(), teachers.get(0).getEmail());
-
-                // Staring MainActivity
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(i);
-                finish();
+                return true;
+                //Intent i = new Intent(getApplicationContext(), InstitutionsActivity.class);
+                //startActivity(i);
+                //finish();
             }
-            Log.e("ERR", teachers.toString() + "");
-            /*
-
-            databaseAccess.open();
-            String pwd;
-            pwd = databaseAccess.getTeachersEntity().getProfesor(mEmail);
-            Log.d("pwd", pwd);
-            databaseAccess.close();
-            if ( pwd != "NOT EXIST"  ){
-                if ( pwd.equals(mPassword) ){
-                    setCurrentProfesorID( 1 );
-                    return true;
-                }
-            }*/
             return false;
         }
 
@@ -289,7 +271,7 @@ public class LoginActivity extends BaseLogin implements LoaderCallbacks<Cursor> 
 
             if (success) {
 
-                Intent intent = new Intent( LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent( LoginActivity.this, InstitutionsActivity.class);
                 startActivity(intent);
 
                 finish();

@@ -1,30 +1,19 @@
 package pe.edu.utp.rendimientoestudiantil.activities;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import pe.edu.utp.rendimientoestudiantil.R;
 import pe.edu.utp.rendimientoestudiantil.SessionManager;
-import pe.edu.utp.rendimientoestudiantil.db.DatabaseAccess;
-import pe.edu.utp.rendimientoestudiantil.models.Course;
-import pe.edu.utp.rendimientoestudiantil.models.Institution;
-import pe.edu.utp.rendimientoestudiantil.entities.InstitutionsEntity;
-import pe.edu.utp.rendimientoestudiantil.models.Student;
 import pe.edu.utp.rendimientoestudiantil.models.Teacher;
 
 /**
  * Created by nico on 30/05/16.
  */
 public class BaseActivity extends AppCompatActivity {
-    public int teacherId;
-    private DatabaseAccess databaseAccess;
-    protected InstitutionsEntity ie;
     private SessionManager session;
     public long idTeacher;
     private String emailTeacher;
@@ -49,5 +38,26 @@ public class BaseActivity extends AppCompatActivity {
         else{
             finish();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.action_logout) {
+            logoutUser();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
