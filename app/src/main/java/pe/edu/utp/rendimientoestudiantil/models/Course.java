@@ -3,6 +3,7 @@ package pe.edu.utp.rendimientoestudiantil.models;
 import android.support.annotation.NonNull;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,10 +63,6 @@ public class Course extends SugarRecord {
                 students.add( courseStudent.getStudent() );
             }
         }
-        //Set<Student> hs = new HashSet<Student>();
-        //hs.addAll(students);
-        //students.clear();
-        //students.addAll(hs);
         return students;
     }
 
@@ -87,5 +84,10 @@ public class Course extends SugarRecord {
 
     public Course() {
 
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

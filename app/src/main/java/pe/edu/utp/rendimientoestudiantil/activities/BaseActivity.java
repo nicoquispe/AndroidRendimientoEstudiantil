@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import pe.edu.utp.rendimientoestudiantil.R;
-import pe.edu.utp.rendimientoestudiantil.SessionManager;
+import pe.edu.utp.rendimientoestudiantil.utils.SessionManager;
 import pe.edu.utp.rendimientoestudiantil.models.Teacher;
 
 /**
@@ -17,6 +17,8 @@ public class BaseActivity extends AppCompatActivity {
     private SessionManager session;
     public long idTeacher;
     private String emailTeacher;
+
+    private static String TAG = "BASEACTIVITY";
 
     public void logoutUser (){
         session.logoutUser();
@@ -33,7 +35,6 @@ public class BaseActivity extends AppCompatActivity {
             Teacher teacher = session.getUserDetails();
             idTeacher = teacher.getId();
             emailTeacher = teacher.getEmail();
-            Log.e("aa", idTeacher + " " +   emailTeacher);
         }
         else{
             finish();

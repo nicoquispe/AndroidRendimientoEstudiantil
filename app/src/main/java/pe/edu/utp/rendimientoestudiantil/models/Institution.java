@@ -27,7 +27,6 @@ public class Institution extends SugarRecord {
 
     }
 
-
     @Override
     public String toString() {
         return name;

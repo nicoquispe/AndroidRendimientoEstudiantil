@@ -1,4 +1,4 @@
-package pe.edu.utp.rendimientoestudiantil;
+package pe.edu.utp.rendimientoestudiantil.utils;
 
 /**
  * Created by nico on 07/06/16.

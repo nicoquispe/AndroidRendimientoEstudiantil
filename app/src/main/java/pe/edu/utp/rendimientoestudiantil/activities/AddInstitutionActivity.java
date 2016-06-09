@@ -39,7 +39,6 @@ public class AddInstitutionActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         name = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
-
         name.setThreshold(3);
         instituciones = Institution.listAll(Institution.class);
 

@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
-import pe.edu.utp.rendimientoestudiantil.SessionManager;
+import pe.edu.utp.rendimientoestudiantil.utils.SessionManager;
 import pe.edu.utp.rendimientoestudiantil.models.Teacher;
 
 
