@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pe.edu.utp.rendimientoestudiantil">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
     <application
         android:name=".Application"
         android:allowBackup="true"
@@ -72,6 +74,14 @@
         <activity
             android:name=".activities.AddEvaluationActivity"
             android:label="@string/title_activity_add_evaluation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.AddNotesSudentsActivity"
+            android:label="@string/title_activity_add_notes_sudents"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.CoursesTabsActivity"
+            android:label="@string/title_activity_courses_tabs"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

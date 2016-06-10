@@ -14,6 +14,7 @@ import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.activities.CoursesActivity;
 import pe.edu.utp.rendimientoestudiantil.R;
+import pe.edu.utp.rendimientoestudiantil.activities.CoursesTabsActivity;
 import pe.edu.utp.rendimientoestudiantil.models.Institution;
 
 public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.ViewHolder>  {
@@ -39,8 +40,7 @@ public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.
                 Intent itemIntent;
                 itemIntent = new Intent(view.getContext(), CoursesActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("name", instituciones.get(position).getName());
-                bundle.putLong("id", instituciones.get(position).getId());
+                bundle.putLong("idInstitution", instituciones.get(position).getId());
                     itemIntent.putExtras(bundle);
                 view.getContext().startActivity(itemIntent);
             }

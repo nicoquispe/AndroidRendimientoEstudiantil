@@ -22,7 +22,6 @@ import pe.edu.utp.rendimientoestudiantil.models.Student;
 public class StudentsActivity extends BaseActivity {
 
     Long idCourse;
-    String nameCourse;
     List<Student> students;
 
     RecyclerView mStudentRecyclerView;
@@ -39,7 +38,7 @@ public class StudentsActivity extends BaseActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
-            idCourse = extras.getLong("id");
+            idCourse = extras.getLong("idCourse");
             course = Course.findById(Course.class, idCourse);
 
 
@@ -72,8 +71,6 @@ public class StudentsActivity extends BaseActivity {
             finish();
         }
     }
-
-
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {

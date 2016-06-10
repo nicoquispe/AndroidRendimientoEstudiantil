@@ -24,7 +24,7 @@
     <string name="title_activity_add_student">Agregar Estudiante</string>
 
 
-    <string name="action_register_evaluations">Registrar Evalación</string>
+    <string name="action_show_evaluations">Mostrar Evalaciones</string>
     <string name="action_add_notes">Agregar Notas</string>
     <string name="action_action_compare">Comparar</string>
     <string name="action_show_compare">Ver comparación</string>
@@ -37,4 +37,7 @@
     </string-array>
     <string name="title_activity_evaluation">EvaluationActivity</string>
     <string name="title_activity_add_evaluation">AddEvaluationActivity</string>
+    <string name="title_activity_add_notes_sudents">AddNotesSudentsActivity</string>
+    <string name="title_activity_courses_tabs">CoursesTabsActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

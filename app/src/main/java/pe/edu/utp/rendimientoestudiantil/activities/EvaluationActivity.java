@@ -62,7 +62,7 @@ public class EvaluationActivity extends AppCompatActivity {
             mEvaluationLayoutManager = new LinearLayoutManager(this);
             mEvaluationRecyclerView.setLayoutManager(mEvaluationLayoutManager);
 
-            mEvaluationAdapter = new EvaluationAdapter( evaluations );
+            mEvaluationAdapter = new EvaluationAdapter( evaluations, course );
             mEvaluationRecyclerView.setAdapter(mEvaluationAdapter);
 
             return;

@@ -18,7 +18,6 @@ import pe.edu.utp.rendimientoestudiantil.models.Institution;
 
 public class CoursesActivity extends BaseActivity {
     Long idInstitution;
-    String nameInstitution;
     Institution institution;
 
     List<Course> courses;
@@ -37,12 +36,10 @@ public class CoursesActivity extends BaseActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null){
 
-            idInstitution = extras.getLong("id");
+            idInstitution = extras.getLong("idInstitution");
             institution = Institution.findById(Institution.class, idInstitution);
 
             courses = Course.find(Course.class, "institution = ?", institution.getId().toString() );
-
-            nameInstitution = extras.getString("name");
 
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +53,7 @@ public class CoursesActivity extends BaseActivity {
                 }
             });
 
-            this.setTitle(nameInstitution);
+            this.setTitle(institution.getName());
 
             mCourseRecyclerView = (RecyclerView) findViewById(R.id.CoursesRecyclerView);
             mCourseRecyclerView.setHasFixedSize(true);
