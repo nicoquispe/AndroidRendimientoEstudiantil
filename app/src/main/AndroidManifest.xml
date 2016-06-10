@@ -3,68 +3,76 @@
     package="pe.edu.utp.rendimientoestudiantil">
 
     <application
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:name=".Application"
-        >
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:theme="@style/AppTheme.NoActionBar"
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"
-            >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data android:name="DATABASE" android:value="rendimiento_academico_3.db" />
-        <meta-data android:name="VERSION" android:value="1" />
-        <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="pe.edu.utp.rendimientoestudiantil.models" />
+
+        <meta-data
+            android:name="DATABASE"
+            android:value="rendimiento_academico_3.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="pe.edu.utp.rendimientoestudiantil.models" />
+
         <activity
             android:name=".activities.InstitutionsActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.CoursesActivity"
             android:label="@string/title_activity_courses"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.StudentsActivity"
             android:label="@string/title_activity_alumns"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ChartActivity"
             android:label="@string/title_activity_chart"
-            android:screenOrientation="landscape"
-            />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activities.AddInstitutionActivity"
             android:label="@string/title_activity_add_institution"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.AddCourseActivity"
             android:label="@string/title_activity_add_course"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.AddStudentActivity"
             android:label="@string/title_activity_add_student"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.EvaluationActivity"
+            android:label="@string/title_activity_evaluation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.AddEvaluationActivity"
+            android:label="@string/title_activity_add_evaluation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
+
 </manifest>

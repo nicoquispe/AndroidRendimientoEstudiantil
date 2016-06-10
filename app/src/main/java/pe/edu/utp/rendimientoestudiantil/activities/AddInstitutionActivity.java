@@ -1,23 +1,15 @@
 package pe.edu.utp.rendimientoestudiantil.activities;
 
-import android.content.ComponentName;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 
 import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
-import pe.edu.utp.rendimientoestudiantil.db.DatabaseAccess;
 import pe.edu.utp.rendimientoestudiantil.models.Institution;
 import pe.edu.utp.rendimientoestudiantil.models.Teacher;
 import pe.edu.utp.rendimientoestudiantil.models.TeacherInstitution;
@@ -28,7 +20,6 @@ public class AddInstitutionActivity extends BaseActivity {
     private ArrayAdapter<String> arrayAdapter;
     List<TeacherInstitution> teacherInstituciones;
     Teacher teacher;
-    private List<Institution> instituciones;
     private AutoCompleteTextView name;
 
     @Override
@@ -38,9 +29,9 @@ public class AddInstitutionActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        name = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+        name = (AutoCompleteTextView) findViewById(R.id.institutionAutoCompleteTextView);
         name.setThreshold(3);
-        instituciones = Institution.listAll(Institution.class);
+        List<Institution> instituciones = Institution.listAll(Institution.class);
 
         ArrayAdapter<Institution> adapter = new ArrayAdapter<Institution>(
                 this, android.R.layout.simple_dropdown_item_1line, instituciones);

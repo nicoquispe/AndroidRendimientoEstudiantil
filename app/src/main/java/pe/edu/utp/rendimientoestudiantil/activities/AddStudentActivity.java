@@ -1,9 +1,6 @@
 package pe.edu.utp.rendimientoestudiantil.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -12,13 +9,9 @@ import android.widget.EditText;
 import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
-import pe.edu.utp.rendimientoestudiantil.db.DatabaseAccess;
 import pe.edu.utp.rendimientoestudiantil.models.Course;
 import pe.edu.utp.rendimientoestudiantil.models.CourseStudent;
-import pe.edu.utp.rendimientoestudiantil.models.Institution;
 import pe.edu.utp.rendimientoestudiantil.models.Student;
-import pe.edu.utp.rendimientoestudiantil.models.Teacher;
-import pe.edu.utp.rendimientoestudiantil.models.TeacherInstitution;
 
 public class AddStudentActivity extends BaseActivity {
 
@@ -47,7 +40,7 @@ public class AddStudentActivity extends BaseActivity {
                 public void onClick(View view) {
                     Student student;
 
-                    List<Student> _students = Student.find(Student.class, "firstname = ? and lastname = ?", firstName.getText().toString().trim(), lastName.getText().toString().trim() );
+                    List<Student> _students = Student.find(Student.class, "first_name = ? and last_name = ?", firstName.getText().toString().trim(), lastName.getText().toString().trim() );
                     if ( _students.size() > 0 ){
                         student = _students.get(0);
                     }

@@ -54,6 +54,18 @@ public class Course extends SugarRecord {
         this.cycle = cycle;
     }
 
+    public List<Evaluation> findEvaluationsByCourse(){
+        return Evaluation.find(Evaluation.class, "course = ?", this.getId().toString());
+        /*
+        List<Evaluation> evaluations = new ArrayList<>();
+        if ( courseEvaluations.size()>0 ){
+            for ( CourseEvaluation courseEvaluation : courseEvaluations ) {
+                evaluations.add( courseEvaluation.getEvaluation() );
+            }
+        }
+        return evaluations;
+        */
+    }
 
     public List<Student> findStudentsByCourse(){
         List<CourseStudent> courseStudents = CourseStudent.find(CourseStudent.class, "course = ?", this.getId().toString());

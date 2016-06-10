@@ -5,24 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.CoursesActivity">
+    tools:context="pe.edu.utp.rendimientoestudiantil.activities.EvaluationActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/CoursesRecyclerView"
+        android:id="@+id/EvaluationsRecyclerView"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:paddingTop="?attr/actionBarSize"
@@ -30,7 +31,7 @@
         android:layout_height="match_parent"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/addEvaluation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"

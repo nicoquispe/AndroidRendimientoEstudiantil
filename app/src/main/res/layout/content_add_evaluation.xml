@@ -9,36 +9,37 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="pe.edu.utp.rendimientoestudiantil.activities.AddStudentActivity"
+    tools:context=".activities.AddEvaluationActivity"
     android:orientation="vertical"
-    tools:showIn="@layout/activity_add_student">
+    tools:showIn="@layout/activity_add_evaluation">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombres"
+        android:text="Nombre"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/firstNameEditText"
+        android:id="@+id/nameEditText"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Apellidos"
+        android:text="Porcentage"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lastNameEditText"
+        android:inputType="number"
+        android:id="@+id/porcentageEditText"
         />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addStudent"
+        android:id="@+id/addEvaluation"
         android:text="Agregar"
         />
 </LinearLayout>

@@ -31,7 +31,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
     @Override
     public void onBindViewHolder( ViewHolder holder, final int position) {
-        holder.nameTextView.setText( students.get(position).getId() + " - " +  students.get(position).toString() );
+        holder.nameTextView.setText( students.get(position).toString() );
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

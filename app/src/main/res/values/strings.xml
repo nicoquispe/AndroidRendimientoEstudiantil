@@ -24,7 +24,7 @@
     <string name="title_activity_add_student">Agregar Estudiante</string>
 
 
-    <string name="action_register_notes">Registrar Nota</string>
+    <string name="action_register_evaluations">Registrar Evalación</string>
     <string name="action_add_notes">Agregar Notas</string>
     <string name="action_action_compare">Comparar</string>
     <string name="action_show_compare">Ver comparación</string>
@@ -35,4 +35,6 @@
         <item>Tarde</item>
         <item>Noche</item>
     </string-array>
+    <string name="title_activity_evaluation">EvaluationActivity</string>
+    <string name="title_activity_add_evaluation">AddEvaluationActivity</string>
 </resources>

@@ -3,24 +3,20 @@ package pe.edu.utp.rendimientoestudiantil.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
-import pe.edu.utp.rendimientoestudiantil.adapters.CourseAdapter;
 import pe.edu.utp.rendimientoestudiantil.adapters.StudentAdapter;
-import pe.edu.utp.rendimientoestudiantil.db.DatabaseAccess;
 import pe.edu.utp.rendimientoestudiantil.models.Course;
-import pe.edu.utp.rendimientoestudiantil.models.Institution;
+import pe.edu.utp.rendimientoestudiantil.models.Evaluation;
 import pe.edu.utp.rendimientoestudiantil.models.Student;
 
 public class StudentsActivity extends BaseActivity {
@@ -47,7 +43,6 @@ public class StudentsActivity extends BaseActivity {
             course = Course.findById(Course.class, idCourse);
 
 
-            students = course.findStudentsByCourse( );
 
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +55,8 @@ public class StudentsActivity extends BaseActivity {
                     startActivityForResult(intent, 0);
                 }
             });
+
+            students = course.findStudentsByCourse( );
 
             this.setTitle(course.getName());
 
@@ -83,7 +80,26 @@ public class StudentsActivity extends BaseActivity {
 
         if (menu.findItem(R.id.action_show_compare) != null)
             menu.findItem(R.id.action_show_compare).setVisible(true);
+        if (menu.findItem(R.id.action_register_notes) != null)
+            menu.findItem(R.id.action_register_notes).setVisible(true);
+        if (menu.findItem(R.id.action_edit_student) != null)
+            menu.findItem(R.id.action_edit_student).setVisible(true);
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_register_notes) {
+
+            Intent intent = new Intent(StudentsActivity.this, EvaluationActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("idCourse", idCourse);
+            intent.putExtras(bundle);
+            startActivity( intent );
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
