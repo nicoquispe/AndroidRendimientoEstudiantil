@@ -34,7 +34,9 @@ public class AddStudentActivity extends BaseActivity {
 
             final EditText firstName = (EditText) findViewById(R.id.firstNameEditText);
             final EditText lastName = (EditText) findViewById(R.id.lastNameEditText);
+            final EditText hours = (EditText) findViewById(R.id.hoursEditText);
             Button addInstitution = (Button) findViewById(R.id.addStudent);
+            assert addInstitution != null;
             addInstitution.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -48,8 +50,7 @@ public class AddStudentActivity extends BaseActivity {
                         student = new Student(firstName.getText().toString().trim(), lastName.getText().toString().trim() );
                         student.save();
                     }
-
-                    CourseStudent courseStudent  = new CourseStudent( course, student);
+                    CourseStudent courseStudent  = new CourseStudent( course, student, Integer.parseInt( hours.getText().toString().trim()) );
                     courseStudent.save();
 
                     setResult(RESULT_OK);

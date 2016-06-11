@@ -8,12 +8,19 @@ import com.orm.SugarRecord;
 public class CourseStudent extends SugarRecord {
     Course course;
     Student student;
-    public CourseStudent(Course course, Student student) {
+    int hours;
+    public CourseStudent(Course course, Student student, int hours) {
         this.course = course;
         this.student = student;
+        this.hours = hours;
     }
     public CourseStudent() {
     }
+
+    public int getHours() {
+        return hours;
+    }
+
     public Course getCourse() {
         return course;
     }

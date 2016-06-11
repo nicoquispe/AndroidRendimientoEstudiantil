@@ -66,6 +66,8 @@ public class StudentsActivity extends BaseActivity {
 
             mStudentAdapter = new StudentAdapter( students );
             mStudentRecyclerView.setAdapter(mStudentAdapter);
+
+
         }
         else {
             finish();
@@ -75,12 +77,12 @@ public class StudentsActivity extends BaseActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-        if (menu.findItem(R.id.action_show_compare) != null)
-            menu.findItem(R.id.action_show_compare).setVisible(true);
+        //if (menu.findItem(R.id.action_show_compare) != null)
+        //    menu.findItem(R.id.action_show_compare).setVisible(true);
         if (menu.findItem(R.id.action_register_notes) != null)
             menu.findItem(R.id.action_register_notes).setVisible(true);
-        if (menu.findItem(R.id.action_edit_student) != null)
-            menu.findItem(R.id.action_edit_student).setVisible(true);
+        if (menu.findItem(R.id.action_select_students) != null)
+            menu.findItem(R.id.action_select_students).setVisible(true);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -94,6 +96,15 @@ public class StudentsActivity extends BaseActivity {
             bundle.putLong("idCourse", idCourse);
             intent.putExtras(bundle);
             startActivity( intent );
+        }
+        if ( id == R.id.action_select_students ){
+            for (int position = 0; position < mStudentRecyclerView.getChildCount(); position++) {
+                mStudentRecyclerView.getChildAt(position).findViewById(R.id.chkStudent).setVisibility(View.VISIBLE);
+                //students.get(position).setCheckboxIsVisible(true);
+                mStudentAdapter.notifyDataSetChanged();
+            }
+            //actionMode = startSupportActionMode(actionModeCallback);
+            //actionMode.setTitle(getString(R.string.selected_modifiable_items));
         }
 
         return super.onOptionsItemSelected(item);

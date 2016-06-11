@@ -30,6 +30,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         return viewHolder;
     }
 
+
+
+
     @Override
     public void onBindViewHolder( ViewHolder holder, final int position) {
         holder.nameTextView.setText( courses.get(position).getName() );
@@ -37,13 +40,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 Intent itemIntent;
-                itemIntent = new Intent(view.getContext(), CoursesTabsActivity.class);
+                itemIntent = new Intent(view.getContext(), StudentsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putLong("idCourse", courses.get(position).getId());
                 itemIntent.putExtras(bundle);
                 view.getContext().startActivity(itemIntent);
             }
         });
+
     }
 
     @Override
@@ -64,5 +68,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             courseCard = (CardView) itemView.findViewById(R.id.courseCard);
             nameTextView = (TextView) itemView.findViewById(R.id.nameTextView);
         }
+
+
     }
 }
