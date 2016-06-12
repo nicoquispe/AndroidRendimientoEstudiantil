@@ -37,7 +37,7 @@
 
         <activity
             android:name=".activities.InstitutionsActivity"
-            android:label="@string/app_name"
+            android:label="@string/institution_name"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.LoginActivity"
@@ -80,7 +80,7 @@
             android:label="@string/title_activity_add_notes_sudents"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.CoursesTabsActivity"
+            android:name=".activities.StudentsTabsActivity"
             android:label="@string/title_activity_courses_tabs"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

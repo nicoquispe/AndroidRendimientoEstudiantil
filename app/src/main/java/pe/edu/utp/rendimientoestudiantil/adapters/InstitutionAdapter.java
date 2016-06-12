@@ -9,12 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.activities.CoursesActivity;
 import pe.edu.utp.rendimientoestudiantil.R;
-import pe.edu.utp.rendimientoestudiantil.activities.CoursesTabsActivity;
 import pe.edu.utp.rendimientoestudiantil.models.Institution;
 
 public class InstitutionAdapter extends RecyclerView.Adapter<InstitutionAdapter.ViewHolder>  {

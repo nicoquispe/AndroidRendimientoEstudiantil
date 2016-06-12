@@ -18,7 +18,7 @@ import pe.edu.utp.rendimientoestudiantil.models.Course;
 import pe.edu.utp.rendimientoestudiantil.models.Evaluation;
 import pe.edu.utp.rendimientoestudiantil.models.Student;
 
-public class AddNotesSudentsActivity extends AppCompatActivity {
+public class AddNotesSudentsActivity extends BaseActivity {
 
     Long idCourse;
     Long idEvaluation;
@@ -35,6 +35,8 @@ public class AddNotesSudentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_notes_students);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        settingBackToolbar(toolbar);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){

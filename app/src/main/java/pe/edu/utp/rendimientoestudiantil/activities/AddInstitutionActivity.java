@@ -1,6 +1,7 @@
 package pe.edu.utp.rendimientoestudiantil.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,7 +30,10 @@ public class AddInstitutionActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        settingBackToolbar(toolbar);
+
         name = (AutoCompleteTextView) findViewById(R.id.institutionAutoCompleteTextView);
+        assert name != null;
         name.setThreshold(3);
         List<Institution> instituciones = Institution.listAll(Institution.class);
 
@@ -39,8 +43,9 @@ public class AddInstitutionActivity extends BaseActivity {
 
         teacher = Teacher.findById(Teacher.class, idTeacher);
 
-        Button addInstitution = (Button) findViewById(R.id.addInstitution);
+        FloatingActionButton addInstitution = (FloatingActionButton) findViewById(R.id.fab);
 
+        assert addInstitution != null;
         addInstitution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

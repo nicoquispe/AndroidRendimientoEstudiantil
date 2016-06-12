@@ -1,6 +1,7 @@
 package pe.edu.utp.rendimientoestudiantil.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ public class AddStudentActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        settingBackToolbar(toolbar);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
@@ -35,7 +37,7 @@ public class AddStudentActivity extends BaseActivity {
             final EditText firstName = (EditText) findViewById(R.id.firstNameEditText);
             final EditText lastName = (EditText) findViewById(R.id.lastNameEditText);
             final EditText hours = (EditText) findViewById(R.id.hoursEditText);
-            Button addInstitution = (Button) findViewById(R.id.addStudent);
+            FloatingActionButton addInstitution = (FloatingActionButton) findViewById(R.id.fab);
             assert addInstitution != null;
             addInstitution.setOnClickListener(new View.OnClickListener() {
                 @Override

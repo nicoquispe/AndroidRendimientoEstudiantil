@@ -37,9 +37,13 @@ public class StudentsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
+
+    public void addStudent( Student student ){
+        students.add( student );
+        mStudentRecyclerView.swapAdapter( new StudentAdapter( students  ), false);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

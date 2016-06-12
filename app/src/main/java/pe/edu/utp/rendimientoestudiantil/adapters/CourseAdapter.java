@@ -11,8 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import pe.edu.utp.rendimientoestudiantil.activities.CoursesTabsActivity;
-import pe.edu.utp.rendimientoestudiantil.activities.StudentsActivity;
+import pe.edu.utp.rendimientoestudiantil.activities.StudentsTabsActivity;
 import pe.edu.utp.rendimientoestudiantil.R;
 import pe.edu.utp.rendimientoestudiantil.models.Course;
 
@@ -40,7 +39,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 Intent itemIntent;
-                itemIntent = new Intent(view.getContext(), StudentsActivity.class);
+                itemIntent = new Intent(view.getContext(), StudentsTabsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putLong("idCourse", courses.get(position).getId());
                 itemIntent.putExtras(bundle);

@@ -34,6 +34,12 @@ public class EvaluationsFragments extends Fragment {
     public EvaluationsFragments() {
     }
 
+    public void addEvaluation( Evaluation evaluation){
+
+        evaluations.add(evaluation);
+        mEvaluationRecyclerView.swapAdapter( new EvaluationAdapter( evaluations, course  ), false);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

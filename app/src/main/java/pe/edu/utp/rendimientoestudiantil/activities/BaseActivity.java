@@ -1,6 +1,7 @@
 package pe.edu.utp.rendimientoestudiantil.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -34,12 +35,32 @@ public class BaseActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
         if( session.isLoggedIn() ){
+
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
             Teacher teacher = session.getUserDetails();
             idTeacher = teacher.getId();
             emailTeacher = teacher.getEmail();
         }
         else{
             finish();
+        }
+    }
+
+    public void settingBackToolbar(Toolbar toolbar){
+
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            if (toolbar != null) {
+                toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+            }
         }
     }
 

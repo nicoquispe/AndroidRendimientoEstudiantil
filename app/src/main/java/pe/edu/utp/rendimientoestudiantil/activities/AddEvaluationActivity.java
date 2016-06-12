@@ -17,7 +17,7 @@ import pe.edu.utp.rendimientoestudiantil.models.CourseStudent;
 import pe.edu.utp.rendimientoestudiantil.models.Evaluation;
 import pe.edu.utp.rendimientoestudiantil.models.Student;
 
-public class AddEvaluationActivity extends AppCompatActivity {
+public class AddEvaluationActivity extends BaseActivity {
 
     private long idCourse;
     private Course course;
@@ -29,6 +29,8 @@ public class AddEvaluationActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        settingBackToolbar(toolbar);;
+
         Bundle extras = getIntent().getExtras();
         if (extras != null){
 
@@ -37,7 +39,7 @@ public class AddEvaluationActivity extends AppCompatActivity {
             course = Course.findById(Course.class, idCourse);
             final EditText nameEditText = (EditText) findViewById(R.id.nameEditText);
             final EditText porcentageEditText = (EditText) findViewById(R.id.porcentageEditText);
-            Button addEvaluation = (Button) findViewById(R.id.addEvaluation);
+            FloatingActionButton addEvaluation = (FloatingActionButton) findViewById(R.id.addEvaluation);
 
             if (addEvaluation != null) {
                 addEvaluation.setOnClickListener(new View.OnClickListener() {

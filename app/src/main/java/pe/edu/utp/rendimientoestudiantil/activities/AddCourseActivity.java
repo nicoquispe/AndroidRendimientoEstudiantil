@@ -1,6 +1,7 @@
 package pe.edu.utp.rendimientoestudiantil.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -34,9 +35,10 @@ public class AddCourseActivity extends BaseActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        settingBackToolbar(toolbar);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null){
-
 
             name = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
             name.setThreshold(3);
@@ -62,10 +64,9 @@ public class AddCourseActivity extends BaseActivity implements View.OnClickListe
 
             seccionEditText = (EditText) findViewById(R.id.seccionEditText);
 
-            Button addInstitution = (Button) findViewById(R.id.addCurso);
-
-            addInstitution.setOnClickListener( this );
-
+            FloatingActionButton addCourse = (FloatingActionButton) findViewById(R.id.addCourse);
+            assert addCourse != null;
+            addCourse.setOnClickListener( this );
         }
         else{
             finish();

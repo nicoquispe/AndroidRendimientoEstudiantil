@@ -3,23 +3,30 @@ package pe.edu.utp.rendimientoestudiantil.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
+import pe.edu.utp.rendimientoestudiantil.adapters.InstitutionAdapter;
 import pe.edu.utp.rendimientoestudiantil.adapters.StudentAdapter;
+import pe.edu.utp.rendimientoestudiantil.fragments.AddInstitutionDialogFragment;
+import pe.edu.utp.rendimientoestudiantil.fragments.AddStudentDialogFragment;
 import pe.edu.utp.rendimientoestudiantil.models.Course;
+import pe.edu.utp.rendimientoestudiantil.models.CourseStudent;
 import pe.edu.utp.rendimientoestudiantil.models.Evaluation;
 import pe.edu.utp.rendimientoestudiantil.models.Student;
+import pe.edu.utp.rendimientoestudiantil.models.Teacher;
 
-public class StudentsActivity extends BaseActivity {
+public class StudentsActivity extends BaseActivity implements AddStudentDialogFragment.AddStudentDialogListener{
 
     Long idCourse;
     List<Student> students;
@@ -28,6 +35,7 @@ public class StudentsActivity extends BaseActivity {
     RecyclerView.Adapter mStudentAdapter;
     RecyclerView.LayoutManager mStudentLayoutManager;
     private Course course;
+    private Teacher teacher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,7 @@ public class StudentsActivity extends BaseActivity {
         setContentView(R.layout.activity_students);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        settingBackToolbar(toolbar);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
@@ -44,16 +53,21 @@ public class StudentsActivity extends BaseActivity {
 
 
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            assert fab != null;
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    showNoticeDialog();
+                    /*
                     Intent intent = new Intent(view.getContext(), AddStudentActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putLong("idCourse", idCourse);
                     intent.putExtras(bundle);
                     startActivityForResult(intent, 0);
+                    */
                 }
             });
+            teacher = Teacher.findById(Teacher.class, idTeacher);
 
             students = course.findStudentsByCourse( );
 
@@ -77,8 +91,6 @@ public class StudentsActivity extends BaseActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-        //if (menu.findItem(R.id.action_show_compare) != null)
-        //    menu.findItem(R.id.action_show_compare).setVisible(true);
         if (menu.findItem(R.id.action_register_notes) != null)
             menu.findItem(R.id.action_register_notes).setVisible(true);
         if (menu.findItem(R.id.action_select_students) != null)
@@ -103,8 +115,6 @@ public class StudentsActivity extends BaseActivity {
                 //students.get(position).setCheckboxIsVisible(true);
                 mStudentAdapter.notifyDataSetChanged();
             }
-            //actionMode = startSupportActionMode(actionModeCallback);
-            //actionMode.setTitle(getString(R.string.selected_modifiable_items));
         }
 
         return super.onOptionsItemSelected(item);
@@ -122,5 +132,39 @@ public class StudentsActivity extends BaseActivity {
             Toast.makeText(this, "Alumno asignado al curso", Toast.LENGTH_SHORT).show();
         }
     }
+    public void showNoticeDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new AddStudentDialogFragment();
+        dialog.show( getSupportFragmentManager(), "Student" );
+    }
 
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        Student student;
+
+
+        final EditText firstName = (EditText) dialog.getDialog().findViewById(R.id.firstNameEditText);
+        final EditText lastName = (EditText) dialog.getDialog().findViewById(R.id.lastNameEditText);
+        final EditText hours = (EditText) dialog.getDialog().findViewById(R.id.hoursEditText);
+
+        List<Student> _students = Student.find(Student.class, "first_name = ? and last_name = ?", firstName.getText().toString().trim(), lastName.getText().toString().trim() );
+        if ( _students.size() > 0 ){
+            student = _students.get(0);
+        }
+        else{
+            student = new Student(firstName.getText().toString().trim(), lastName.getText().toString().trim() );
+            student.save();
+            students.add( student );
+
+            mStudentRecyclerView.swapAdapter( new StudentAdapter( students  ), false);
+        }
+        CourseStudent courseStudent  = new CourseStudent( course, student, Integer.parseInt( hours.getText().toString().trim()) );
+        courseStudent.save();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
 }

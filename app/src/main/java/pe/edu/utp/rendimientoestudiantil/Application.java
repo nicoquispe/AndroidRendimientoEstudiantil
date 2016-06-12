@@ -22,7 +22,7 @@ public class Application extends SugarApp {
         super.onCreate();
         SugarContext.init(getApplicationContext());
 
-        Teacher teacher = new Teacher("Ubaldo","Lizardo Silva","c00210@grupoutp.edu.pe","123456");
+        Teacher teacher = new Teacher("Ubaldo","Lizardo Silva","c00210@utp.edu.pe","123456");
         teacher.save();
     }
 
