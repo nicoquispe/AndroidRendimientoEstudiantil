@@ -1,14 +1,21 @@
 package pe.edu.utp.rendimientoestudiantil.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.view.GestureDetectorCompat;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.ActionMode;
+import android.view.GestureDetector;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,6 +23,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import pe.edu.utp.rendimientoestudiantil.R;
+import pe.edu.utp.rendimientoestudiantil.adapters.DividerItemDecoration;
 import pe.edu.utp.rendimientoestudiantil.adapters.InstitutionAdapter;
 import pe.edu.utp.rendimientoestudiantil.adapters.StudentAdapter;
 import pe.edu.utp.rendimientoestudiantil.fragments.AddInstitutionDialogFragment;
@@ -26,16 +34,23 @@ import pe.edu.utp.rendimientoestudiantil.models.Evaluation;
 import pe.edu.utp.rendimientoestudiantil.models.Student;
 import pe.edu.utp.rendimientoestudiantil.models.Teacher;
 
-public class StudentsActivity extends BaseActivity implements AddStudentDialogFragment.AddStudentDialogListener{
+public class StudentsActivity extends BaseActivity implements AddStudentDialogFragment.AddStudentDialogListener,
+        RecyclerView.OnItemTouchListener,
+        View.OnClickListener,
+        ActionMode.Callback{
 
     Long idCourse;
     List<Student> students;
 
     RecyclerView mStudentRecyclerView;
-    RecyclerView.Adapter mStudentAdapter;
+    StudentAdapter mStudentAdapter;
     RecyclerView.LayoutManager mStudentLayoutManager;
     private Course course;
     private Teacher teacher;
+    Context mContext;
+    int itemCount;
+    GestureDetectorCompat gestureDetector;
+    ActionMode actionMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +58,7 @@ public class StudentsActivity extends BaseActivity implements AddStudentDialogFr
         setContentView(R.layout.activity_students);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         settingBackToolbar(toolbar);
 
         Bundle extras = getIntent().getExtras();
@@ -80,6 +96,16 @@ public class StudentsActivity extends BaseActivity implements AddStudentDialogFr
 
             mStudentAdapter = new StudentAdapter( students );
             mStudentRecyclerView.setAdapter(mStudentAdapter);
+
+
+            RecyclerView.ItemDecoration itemDecoration =
+                    new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
+            mStudentRecyclerView.addItemDecoration(itemDecoration);
+            mStudentRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mStudentRecyclerView.addOnItemTouchListener(this);
+
+            gestureDetector =
+                    new GestureDetectorCompat(this, new RecyclerViewStudentOnGestureListener());
 
 
         }
@@ -166,5 +192,112 @@ public class StudentsActivity extends BaseActivity implements AddStudentDialogFr
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
 
+    }
+
+
+    private void myToggleSelection(int idx) {
+        mStudentAdapter.toggleSelection(idx);
+        String title = getString(R.string.selected_count, mStudentAdapter.getSelectedItemCount());
+        actionMode.setTitle(title);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        MenuInflater inflater = mode.getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false;
+    }
+
+    @Override
+    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.action_delete_student:
+                List<Integer> selectedItemPositions = mStudentAdapter.getSelectedItems();
+                int currPos;
+                for (int i = selectedItemPositions.size() - 1; i >= 0; i--) {
+                    currPos = selectedItemPositions.get(i);
+                    //RecyclerViewDemoApp.removeItemFromList(currPos);
+                    mStudentAdapter.removeData(currPos);
+                }
+                actionMode.finish();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode mode) {
+        this.actionMode = null;
+        mStudentAdapter.clearSelections();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.StudentsRecyclerView) {
+
+            int idx = mStudentRecyclerView.getChildPosition(view);
+            if(actionMode != null) {
+                myToggleSelection(idx);
+                return;
+            }
+        }
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+        gestureDetector.onTouchEvent(e);
+        return false;
+    }
+
+    @Override
+    public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+    }
+
+    @Override
+    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+    }
+    private void addItemToList() {
+        Student student = new Student();
+        itemCount++;
+        int position = ((LinearLayoutManager) mStudentRecyclerView.getLayoutManager()).
+                findFirstVisibleItemPosition();
+        position++;
+        //RecyclerViewDemoApp.addItemToList(student, position);
+        mStudentAdapter.addData(student, position);
+    }
+    private class RecyclerViewStudentOnGestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            View view = mStudentRecyclerView.findChildViewUnder(e.getX(), e.getY());
+            onClick(view);
+            return super.onSingleTapConfirmed(e);
+        }
+
+        public void onLongPress(MotionEvent e) {
+            View view = mStudentRecyclerView.findChildViewUnder(e.getX(), e.getY());
+            if (actionMode != null) {
+                return;
+            }
+            // Start the CAB using the ActionMode.Callback defined above
+            actionMode = startActionMode( StudentsActivity.this );
+            int idx = mStudentRecyclerView.getChildPosition(view);
+            myToggleSelection(idx);
+            super.onLongPress(e);
+        }
     }
 }

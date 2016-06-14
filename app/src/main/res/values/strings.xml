@@ -52,4 +52,5 @@
     <string name="description">Descripción</string>
     <string name="porcentage">Porcentage</string>
     <string name="institution_name">Instituciones</string>
+    <string name="selected_count">%1$s seleccionados</string>
 </resources>

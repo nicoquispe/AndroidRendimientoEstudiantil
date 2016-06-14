@@ -33,7 +33,7 @@ import pe.edu.utp.rendimientoestudiantil.models.CourseStudent;
 import pe.edu.utp.rendimientoestudiantil.models.Evaluation;
 import pe.edu.utp.rendimientoestudiantil.models.Student;
 
-public class StudentsTabsActivity extends AppCompatActivity implements AddStudentDialogFragment.AddStudentDialogListener, AddEvaluationDialogFragment.AddEvaluationDialogListener {
+public class StudentsTabsActivity extends BaseActivity implements AddStudentDialogFragment.AddStudentDialogListener, AddEvaluationDialogFragment.AddEvaluationDialogListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -52,6 +52,7 @@ public class StudentsTabsActivity extends AppCompatActivity implements AddStuden
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        settingBackToolbar(toolbar);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
@@ -153,14 +154,12 @@ public class StudentsTabsActivity extends AppCompatActivity implements AddStuden
         else{
             student = new Student(firstName.getText().toString().trim(), lastName.getText().toString().trim() );
             student.save();
-        }
-        CourseStudent courseStudent  = new CourseStudent( course, student, Integer.parseInt( hours.getText().toString().trim()) );
-        courseStudent.save();
-        if ( _students.size() > 0 ){
             sf.addStudent( student );
             mViewPager.getAdapter().notifyDataSetChanged();
 
         }
+        CourseStudent courseStudent  = new CourseStudent( course, student, Integer.parseInt( hours.getText().toString().trim()) );
+        courseStudent.save();
     }
     private void addEvaluation( DialogFragment dialog ){
 
