@@ -141,6 +141,25 @@ public class StudentsFragment extends Fragment implements RecyclerView.OnItemTou
                 }
                 actionMode.finish();
                 return true;
+            case R.id.action_trending:
+
+                List<Long> ids = new ArrayList<>();
+                for ( int id : mStudentAdapter.getSelectedItems() ){
+                    ids.add(  students.get( id ).getId() );
+                }
+                long[] longArray = new long[ids.size()];
+                for (int i = 0; i < ids.size(); i++)
+                    longArray[i] = ids.get(i);
+
+                Intent itemIntent;
+                itemIntent = new Intent(getActivity(), ChartActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putLong("idCourse", course.getId());
+                Log.e("asda", longArray.toString());
+                bundle.putLongArray( "idsStudents", longArray );
+                itemIntent.putExtras(bundle);
+                getActivity().startActivity(itemIntent);
+                return true;
             default:
                 return false;
         }
@@ -209,7 +228,6 @@ public class StudentsFragment extends Fragment implements RecyclerView.OnItemTou
         public boolean onSingleTapConfirmed(MotionEvent e) {
             View view = mStudentRecyclerView.findChildViewUnder(e.getX(), e.getY());
             if (actionMode != null) {
-                Log.e("aaaa","asd");
                 onClick(view);
             }
             else{
@@ -224,7 +242,6 @@ public class StudentsFragment extends Fragment implements RecyclerView.OnItemTou
                 for (int i = 0; i < ids.size(); i++)
                     longArray[i] = ids.get(i);
                 bundle.putLongArray( "idsStudents", longArray );
-                bundle.putLong("idStudent", students.get(mStudentRecyclerView.getChildPosition( view )).getId());
                 itemIntent.putExtras(bundle);
                 view.getContext().startActivity(itemIntent);
             }

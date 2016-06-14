@@ -33,7 +33,7 @@ public class ChartActivity extends AppCompatActivity {
     private long idCourse;
     private List<Student> students;
     private List<Evaluation> evaluations;
-
+    long[] idStudents;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +48,7 @@ public class ChartActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         idCourse = extras.getLong("idCourse");
-        idCourse = extras.getLong("idCourse");
+        idStudents = extras.getLongArray("idsStudents");
         course = Course.findById(Course.class, idCourse);
 
         students = course.findStudentsByCourse( );
@@ -97,8 +97,9 @@ public class ChartActivity extends AppCompatActivity {
 
         ArrayList<ILineDataSet> sets = new ArrayList<ILineDataSet>();
         int count = 0;
-        for (Student student : students ) {
 
+        for ( long idStudent : idStudents ) {
+            Student student = Student.findById( Student.class, idStudent );
             ArrayList<Entry> e2 = new ArrayList<Entry>();
             int i = 0;
             for( Evaluation evaluation: evaluations ){
