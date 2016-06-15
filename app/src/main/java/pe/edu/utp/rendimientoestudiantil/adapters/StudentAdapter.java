@@ -1,9 +1,11 @@
 package pe.edu.utp.rendimientoestudiantil.adapters;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +34,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         }
         else {
             selectedItems.put(pos, true);
+
         }
         notifyItemChanged(pos);
     }
@@ -78,8 +81,17 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     @Override
     public void onBindViewHolder( ViewHolder holder, final int position) {
         holder.nameTextView.setText( students.get(position).toString() );
+        Log.e("View Holder", Boolean.toString( selectedItems.get(position, false)) );
         holder.itemView.setActivated(selectedItems.get(position, false));
+        if( selectedItems.get(position, false) ){
+            holder.itemView.setBackgroundColor(R.color.colorPrimaryDark);
+        }
+        else{
+            holder.itemView.setBackgroundColor(Color.TRANSPARENT );
+        }
 
+
+        //holder.itemView.setBackgroundColor( R.color.colorDivider );
         /*
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

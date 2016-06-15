@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_backup"
-        app:showAsAction="ifRoom"
-        android:title="backup"
-        android:icon="@drawable/ic_backup"
-        />
-    <item
         android:id="@+id/action_trending"
         app:showAsAction="ifRoom"
         android:title="action_trending"

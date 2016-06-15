@@ -37,11 +37,10 @@
         <item>Tarde</item>
         <item>Noche</item>
     </string-array>
-    <string name="title_activity_evaluation">EvaluationActivity</string>
-    <string name="title_activity_add_evaluation">AddEvaluationActivity</string>
-    <string name="title_activity_add_notes_sudents">AddNotesSudentsActivity</string>
-    <string name="title_activity_courses_tabs">CoursesTabsActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_evaluation">Evaluaciones</string>
+    <string name="title_activity_add_evaluation">Agregar evaluación</string>
+    <string name="title_activity_add_notes_sudents">Agregar notas</string>
+    <string name="title_activity_courses_tabs">Cursos</string>
     <string name="name_institution">Nombre de la institución</string>
     <string name="name_course">Nombre del curso</string>
     <string name="cycle">Ciclo</string>

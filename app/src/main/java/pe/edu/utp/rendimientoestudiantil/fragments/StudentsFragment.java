@@ -9,7 +9,6 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -155,7 +154,6 @@ public class StudentsFragment extends Fragment implements RecyclerView.OnItemTou
                 itemIntent = new Intent(getActivity(), ChartActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putLong("idCourse", course.getId());
-                Log.e("asda", longArray.toString());
                 bundle.putLongArray( "idsStudents", longArray );
                 itemIntent.putExtras(bundle);
                 getActivity().startActivity(itemIntent);
@@ -174,8 +172,6 @@ public class StudentsFragment extends Fragment implements RecyclerView.OnItemTou
     @Override
     public void onClick(View view) {
 
-        Log.e( "TAG", view.getResources().getResourceName(view.getId()));
-        Log.e( "TAG", Integer.toString( view.getId() ));
         if (view.getId() == R.id.studentCard) {
 
             int idx = mStudentRecyclerView.getChildPosition(view);
